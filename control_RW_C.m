@@ -14,7 +14,6 @@ for j = 2:H
     for i = 1:N
         xbar(:,i,j) = sys_vir_C(xbar(:,i,j-1),dt,uk(:,i,j));                    % Pass Particles through system dynamics
         wk(i,j) = wk(i,j-1)*mvnpdf((ref(:,j)-M*xbar(:,i,j))',zeros(6,1)',R_u)*constraint_sat(xbar(:,i,j),uL,uH,tL,tH,ref);  % Weight Particles with Contraints Satisfaction
-        xbar(:,i,j-1) = [xk(:,i,j-1);uk(:,i,j-1)];
     end
     wk(:,j) = wk(:,j)./sum(wk(:,j));                                            % Normalize Weight Particles              
     %Resampling
